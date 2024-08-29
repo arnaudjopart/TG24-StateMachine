@@ -10,9 +10,24 @@ public class ChasingState : State
 
     public override void Tick(float _deltaTime)
     {
-        Debug.Log("Chasing state");
+        
+        _character.MoveToTarget(_deltaTime);
+        if (_character.HasLostTarget())
+        {
+            Debug.Log("HasLostTarget");
+            _machine.GoToIdleState();
+        }
+        if (_character.HasReachedTarget())
+        {
+
+        }
     }
 
-    
-    
+    public override void OnStateEnter()
+    {
+        _character.StartChase();
+    }
+
+
+
 }

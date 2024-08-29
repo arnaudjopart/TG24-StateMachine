@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class StateMachine : MonoBehaviour
@@ -23,7 +20,18 @@ public class StateMachine : MonoBehaviour
 
     public void GoToChaseState()
     {
+        _currentState.OnStateExit();
         _currentState = _chaseState;
+        _currentState.OnStateEnter();
+    }
+
+    public void GoToIdleState()
+    {
+        _currentState.OnStateExit();
+        _currentState = _idleState;
+        _currentState.OnStateEnter();
+
+        
     }
 
     #region Private & Protected
@@ -32,7 +40,7 @@ public class StateMachine : MonoBehaviour
     private ChasingState _chaseState;
     private State _currentState;
 
-    [SerializeField] private ICanUseStateMachine _enemy;
+    [SerializeField] private Enemy _enemy;
     #endregion
 
 }
