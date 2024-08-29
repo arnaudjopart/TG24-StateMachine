@@ -5,13 +5,12 @@ public abstract class State
 {
     
 
-    public State (ICanUseStateMachine character, StateMachine machine)
+    public State (ICanUseStateMachine character)
     {
         _character = character;
-        _machine = machine;
     }
 
-    public abstract void Tick(float _deltaTime);
+    public abstract State Tick(float _deltaTime);
     public virtual void OnStateEnter()
     {
 
@@ -24,7 +23,6 @@ public abstract class State
 
     #region
     protected ICanUseStateMachine _character;
-    protected StateMachine _machine;
     #endregion
 }
 

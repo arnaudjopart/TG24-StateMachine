@@ -4,23 +4,24 @@ using UnityEngine;
 
 public class ChasingState : State
 {
-    public ChasingState(ICanUseStateMachine enemy, StateMachine machine) : base(enemy, machine)
+    public ChasingState(ICanUseStateMachine enemy) : base(enemy)
     {
     }
 
-    public override void Tick(float _deltaTime)
+    public override State Tick(float _deltaTime)
     {
         
         _character.MoveToTarget(_deltaTime);
         if (_character.HasLostTarget())
         {
             Debug.Log("HasLostTarget");
-            _machine.GoToIdleState();
+            return new IdleState(_character);
         }
         if (_character.HasReachedTarget())
         {
 
         }
+        return this;
     }
 
     public override void OnStateEnter()
